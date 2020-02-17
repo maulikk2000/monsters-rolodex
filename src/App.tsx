@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import CardList from "./components/card-list/card-list.component";
+import { IMonster } from "./components/card-list/IMonster";
 
-const App = () => {
+const App: React.FC = () => {
+  const [monsters, setmonsters] = useState<IMonster[]>([]);
+
+  useEffect(() => {
+    fetch("http://jsonplaceholder.typicode.com/users")
+      .then(resp => resp.json())
+      .then(m => setmonsters(m));
+
+    return () => {
+      //cleanup
+    };
+  }, [monsters]);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="">
+      {/* {monsters.map(m => (
+        <CardList name={m.name}></CardList>
+      ))} */}
+      <CardList monsters={monsters}></CardList>
     </div>
   );
-}
+};
 
 export default App;
