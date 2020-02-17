@@ -1,4 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+  InputHTMLAttributes,
+  ChangeEvent
+} from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import CardList from "./components/card-list/card-list.component";
@@ -6,6 +11,7 @@ import { IMonster } from "./components/card-list/IMonster";
 
 const App: React.FC = () => {
   const [monsters, setmonsters] = useState<IMonster[]>([]);
+  const [searchField, setsearchField] = useState("");
 
   useEffect(() => {
     fetch("http://jsonplaceholder.typicode.com/users")
@@ -16,12 +22,24 @@ const App: React.FC = () => {
       //cleanup
     };
   }, [monsters]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log("field", e.target.value);
+    setsearchField(e.target.value);
+  };
+
+  const filteredMonsters = monsters.filter(monster =>
+    monster.name.toLowerCase().includes(searchField.toLowerCase())
+  );
+
   return (
-    <div className="">
-      {/* {monsters.map(m => (
-        <CardList name={m.name}></CardList>
-      ))} */}
-      <CardList monsters={monsters}></CardList>
+    <div className="App">
+      <input
+        type="search"
+        placeholder="search monsters"
+        onChange={handleChange}
+      ></input>
+      <CardList monsters={filteredMonsters}></CardList>
     </div>
   );
 };
