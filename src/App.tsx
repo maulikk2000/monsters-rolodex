@@ -8,6 +8,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import CardList from "./components/card-list/card-list.component";
 import { IMonster } from "./components/card-list/IMonster";
+import SearchBox from "./components/search-box/search-box.component";
 
 const App: React.FC = () => {
   const [monsters, setmonsters] = useState<IMonster[]>([]);
@@ -34,11 +35,15 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <input
+      {/* <input
         type="search"
         placeholder="search monsters"
         onChange={handleChange}
-      ></input>
+      ></input> */}
+      <SearchBox
+        placeholder={"Search Monsters"}
+        handleChange={handleChange}
+      ></SearchBox>
       <CardList monsters={filteredMonsters}></CardList>
     </div>
   );
