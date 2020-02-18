@@ -35,11 +35,7 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      {/* <input
-        type="search"
-        placeholder="search monsters"
-        onChange={handleChange}
-      ></input> */}
+      <h1>Monsters Rolodex</h1>
       <SearchBox
         placeholder={"Search Monsters"}
         handleChange={handleChange}
