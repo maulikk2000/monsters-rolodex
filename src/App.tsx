@@ -15,7 +15,7 @@ const App: React.FC = () => {
   const [searchField, setsearchField] = useState("");
 
   useEffect(() => {
-    fetch("http://jsonplaceholder.typicode.com/users")
+    fetch("https://jsonplaceholder.typicode.com/users")
       .then(resp => resp.json())
       .then(m => setmonsters(m));
 
